@@ -140,43 +140,56 @@
 \maketitle
 
 \pagebreak
-
-
-\pagebreak
 \begin{homeworkProblem}
+  \subsection*{Background}
   The goal of this assignment is to prove the time complexity of the mergesort algorithm.
   We are given the base complexity formula as:
-$$
   \begin{align}
       T(n) = 2T(n / 2) + f(n)
-    \end{align}
-$$
+  \end{align}
 In this case, $T(n)$ is the time it takes to mergesort an array of size $n$, and $f(n)$ is the time it takes to
 assemble two partial solutions of size $n / 2$ to a sorted array with $n$ elements. Generally, $f(n) \approx n$.
 
 For an array with $n = 8$, we can write:
-$$
 \begin{align}
 T(8) = 2T(4) + f(8)
 \end{align}
-$$
 Then, $T(4) = 2T(2)+f(4)$; and $T(2) = 2T(1) + f(2)$; and finally $T(1) = f(1)$. Using the last finding,
 we can solve backwards:
-$$
 \begin{align}
-  T(2) = 2T(1) + f(2) \\
-= 2f(1) + f(2) \\
-\\
-T(4) = 2T(2) + f(4) \\
-= 2(2f(1) + f(2)) + f(4) \\
-= 4f(1) + 2f(2) + f(4) \\\\
-
-T(8) = 2T(4) + f(8) \\
-= 2(4f(1) + 2f(2) + f(4)) + f(8) \\
-= 8f(1) + 4f(2) + 2f(4) + f(8)
+  T(2) &= 2T(1) + f(2) \\
+       &= 2f(1) + f(2) \\[1em]
+  T(4) &= 2T(2) + f(4) \\
+       &= 2(2f(1) + f(2)) + f(4) \\
+       &= 4f(1) + 2f(2) + f(4) \\[1em]
+  T(8) &= 2T(4) + f(8) \\
+       &= 2(4f(1) + 2f(2) + f(4)) + f(8) \\
+       &= 8f(1) + 4f(2) + 2f(4) + f(8)
 \end{align}
-$$
+Given that $f(n) \equiv n$, the last equation can be rewritten as:
+\begin{align}
+T(8) \equiv 8 \times 1 + 4 \times 2 + 2 \times 4 + 8 \\
+= 32 = 8 \times 3 \\
+= 8(1 + log_{2}8)
+\end{align}
+
+We have shown that, for mergesort, $T(n) \equiv nlog_{2}n$ (or, $\mathcal{O} (nlog_{2}n$),
+
+\subsection*{Proof}
+We begin by writing:
+\begin{align*}
+T(n) &= 2T\!\left(\frac{n}{2}\right) + f(n) \\[4pt]
+     &= 2\left[ 2T\!\left(\frac{n}{4}\right) + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[4pt]
+     &= 2\left[ 2\left[ 2T\!\left(\frac{n}{8}\right) + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[4pt]
+     &= 2\left[ 2\left[ 2\left[ 2T\!\left(\frac{n}{16}\right) + f\!\left(\frac{n}{8}\right) \right] + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n)
+\end{align*}
+
+
+
+
 \end{homeworkProblem}
+
+\pagebreak
 
 
 \end{document}
