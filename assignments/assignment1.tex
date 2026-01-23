@@ -144,19 +144,19 @@
   \subsection*{Background}
   The goal of this assignment is to prove the time complexity of the mergesort algorithm.
   We are given the base complexity formula as:
-  \begin{align}
+  \begin{align*}
       T(n) = 2T(n / 2) + f(n)
-  \end{align}
+  \end{align*}
 In this case, $T(n)$ is the time it takes to mergesort an array of size $n$, and $f(n)$ is the time it takes to
 assemble two partial solutions of size $n / 2$ to a sorted array with $n$ elements. Generally, $f(n) \approx n$.
 
 For an array with $n = 8$, we can write:
-\begin{align}
+\begin{align*}
 T(8) = 2T(4) + f(8)
-\end{align}
+\end{align*}
 Then, $T(4) = 2T(2)+f(4)$; and $T(2) = 2T(1) + f(2)$; and finally $T(1) = f(1)$. Using the last finding,
 we can solve backwards:
-\begin{align}
+\begin{align*}
   T(2) &= 2T(1) + f(2) \\
        &= 2f(1) + f(2) \\[1em]
   T(4) &= 2T(2) + f(4) \\
@@ -165,26 +165,49 @@ we can solve backwards:
   T(8) &= 2T(4) + f(8) \\
        &= 2(4f(1) + 2f(2) + f(4)) + f(8) \\
        &= 8f(1) + 4f(2) + 2f(4) + f(8)
-\end{align}
+\end{align*}
 Given that $f(n) \equiv n$, the last equation can be rewritten as:
-\begin{align}
+\begin{align*}
 T(8) \equiv 8 \times 1 + 4 \times 2 + 2 \times 4 + 8 \\
 = 32 = 8 \times 3 \\
-= 8(1 + log_{2}8)
-\end{align}
-
-We have shown that, for mergesort, $T(n) \equiv nlog_{2}n$ (or, $\mathcal{O} (nlog_{2}n$),
-
-\subsection*{Proof}
-We begin by writing:
-\begin{align*}
-T(n) &= 2T\!\left(\frac{n}{2}\right) + f(n) \\[4pt]
-     &= 2\left[ 2T\!\left(\frac{n}{4}\right) + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[4pt]
-     &= 2\left[ 2\left[ 2T\!\left(\frac{n}{8}\right) + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[4pt]
-     &= 2\left[ 2\left[ 2\left[ 2T\!\left(\frac{n}{16}\right) + f\!\left(\frac{n}{8}\right) \right] + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n)
+= 8(1 + \log_{2}8)
 \end{align*}
 
+We have shown that, for mergesort, $T(n) \equiv n\log_{2}n$ (or, $\mathcal{O} (n\log_{2}n)$),
 
+\subsection*{Proof}
+We begin by expanding the recurrence relation:
+\begin{align*}
+    T(n) &= 2T\!\left(\frac{n}{2}\right) + f(n) \\[6pt]
+         &= 2\left[ 2T\!\left(\frac{n}{4}\right) + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[6pt]
+         &= 2\left[ 2\left[ 2T\!\left(\frac{n}{8}\right) + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[6pt]
+         &= 2\left[ 2\left[ 2\left[ 2T\!\left(\frac{n}{16}\right) + f\!\left(\frac{n}{8}\right) \right] + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n)
+\intertext{By distributing the outer coefficients into the brackets, we see a pattern emerge:}
+    T(n) &= 16T\!\left(\frac{n}{16}\right) + 8f\!\left(\frac{n}{8}\right) + 4f\!\left(\frac{n}{4}\right) + 2f\!\left(\frac{n}{2}\right) + f(n)
+\intertext{We observe that for each term, the coefficient matches the denominator inside the function. Since the cost function for Mergesort is $f(n) = n$, we can substitute this into each term of the sum (e.g., $8 \cdot f(n/8) = 8 \cdot (n/8) = n$):}
+    T(n) &= 16T\!\left(\frac{n}{16}\right) + n + n + n + n \\[6pt]
+         &= 16T\!\left(\frac{n}{16}\right) + 4n
+\intertext{We can see that for a recursion of depth $k$, the first term becomes $2^k T(n/2^k)$, and we add $n$ exactly $k$ times. This can be generalized to the following:}
+    T(n) &= 2^k T\!\left(\frac{n}{2^k}\right) + k \cdot n
+\intertext{The recursion stops when the array size becomes 1 (the base case). If we set the array size $\frac{n}{2^k} = 1$, it implies that $2^k = n$. Solving for $k$:}
+    \frac{n}{2^k} &= 1 \implies 2^k = n \implies k = \log_2(n)
+\intertext{Finally, we substitute $k = \log_2(n)$ and $2^k = n$ back into the general formula derived above:}
+    T(n) &= n \cdot T(1) + n \log_2(n)
+\end{align*}
+
+\subsection*{Conclusion}
+We have successfully derived the expression for the recurrence relation. The final formula is:
+\begin{align*}
+  T(n)=n \times T(1) + n \log_{2}(n)
+\end{align*}
+If we assume that the base case, $T(1)$, takes a constant amount of time, denoted as $c$, then the equation becomes:
+\begin{align*}
+  T(n) = c \times n + n \log_{2}(n)
+\end{align*}
+As $n$ approaches infinity, the term $n\log_{2}(n)$ grows much faster than the linear term $c \times n$. Therefore, the linear term becomes negligible, and we conclude that the time complexity of Mergesort is:
+\begin{align*}
+  T(n) \in \mathcal{O}(n \log n)
+\end{align*}
 
 
 \end{homeworkProblem}

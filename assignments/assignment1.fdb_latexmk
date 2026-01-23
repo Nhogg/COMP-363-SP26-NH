@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1769101584.9609 "assignment1.tex" "assignment1.pdf" "assignment1" 1769101585.48714 0
+["pdflatex"] 1769140405.70423 "assignment1.tex" "assignment1.pdf" "assignment1" 1769140405.97549 0
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1767555874 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1767555874 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1767555874 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -28,6 +28,8 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1767555874 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1767555874 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1767555874 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1767555874 37912 77d683123f92148345f3fc36a38d9ab1 ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1767555874 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1767555874 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1767555874 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1767555874 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
@@ -133,8 +135,8 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1767555874 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1768939257 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1768939207 2008247 4474fe9ff84bc10c709f0242e96c0ee4 ""
-  "assignment1.aux" 1769101585.43039 114 1d8dfcbf6a50997c186a163c06eca2e8 "pdflatex"
-  "assignment1.tex" 1769101584.6161 5218 94f09821b42dcd8a1616f464c9b545e8 ""
+  "assignment1.aux" 1769140405.94337 114 aa5480c4a1e38dd5be20da8e81f16f4f "pdflatex"
+  "assignment1.tex" 1769140398.0151 7125 d0ce4c4970eb4696520a37fc541773a0 ""
   (generated)
   "assignment1.aux"
   "assignment1.log"
