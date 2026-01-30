@@ -52,13 +52,13 @@ def simple_recursive_multiplication(x: str, y: str) -> str:
 
 def k_multiply(x: str, y: str) -> str:
     """
-    Karatsuba recursive multipliocation for nonnegative integer strings.
+    Karatsuba recursive multiplication for nonnegative integer strings.
 
     Uses the optimized formula with only 3 recursive calls:
-    xy = ax*10^n + ((a+b)(c+d) - ac - bd)*10^(n/2) + bd
+    xy = ac*10^n + ((a+b)(c+d) - ac - bd)*10^(n/2) + bd
 
     Includes padding logic using .zfill to handle cases where recursive
-    sums (a + b) and (c + d) result in strings of uneqal length.
+    sums (a + b) and (c + d) result in strings of unequal length.
     """
     n = len(x)
 
@@ -148,8 +148,24 @@ def plot_results(n_values, simple_times, karatsuba_times):
     plt.xticks(n_values, labels=n_values)
     plt.show()
 
-def main():
-    benchmark()
 
 if __name__ == "__main__":
-    main()
+    tests = [
+            ("12", "34"),
+            ("99", "99"),
+            ("0123", "0456"),
+            ("1234", "5678"),
+            ("0000", "0000"),
+            ("1111", "0001"),
+            ("1234567890123456", "9876543210123456"),
+            ("12345678901234561234567890123456", "12345678901234561234567890123456"),
+            ("1234567890123456123456789012345612345678901234561234567890123456", "1234567890123456123456789012345612345678901234561234567890123456"),
+        ]
+
+    for x, y in tests:
+        # Compare against Python int multiplication for correctness.
+        got = k_multiply(x, y)
+        want = str(int(x) * int(y))
+        print(f"{x} * {y} = {got}  (ok={got == want})")
+
+    benchmark()
