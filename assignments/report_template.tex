@@ -1,0 +1,220 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} 
+\usepackage{listings} 
+\usepackage{xcolor}
+\usepackage{float}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Code Listing Settings (Makes Python look nice)
+%
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\reportAuthor}
+\chead{\reportClass\ : \reportTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Configuration
+%
+
+\newcommand{\reportTitle}{Assignment 2: Karatsuba Multiplication}
+\newcommand{\reportDueDate}{30 January, 2026}
+\newcommand{\reportClass}{COMP 363 - Algorithms}
+\newcommand{\reportInstructor}{Leo Irakliotis}
+\newcommand{\reportAuthor}{\textbf{Nathan Hogg}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\reportClass:\ \reportTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \reportDueDate}\\
+    \vspace{0.1in}\large{\textit{\reportInstructor}}
+    \vspace{3in}
+}
+
+\author{\reportAuthor}
+\date{}
+
+%
+% Section Numbering (Enabled for Reports)
+%
+\setcounter{secnumdepth}{2} % Enables numbering like 1.0, 1.1
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+% ---------------------------------------------------------
+% REPORT CONTENT STARTS HERE
+% ---------------------------------------------------------
+
+\section{Introduction}
+In this assignment, I implemented the Karatsuba multiplication algorithm to demonstrate its efficiency improvements over standard recursive multiplication. While standard multiplication operates in $\mathcal{O}(n^2)$ time, Karatsuba optimizes this to approximately $\mathcal{O}(n^{1.58})$ by reducing the number of recursive calls from four to three.
+
+\section{Verification}
+To ensure the correctness of the Karatsuba implementation, I ran the algorithm against a suite of test cases, comparing the results to Python's built-in integer multiplication. As shown in the output below, the implementation passed all sanity checks, including edge cases with zeros and large numbers.
+
+\begin{verbatim}
+12 * 34 = 408  (ok=True)
+99 * 99 = 9801  (ok=True)
+0123 * 0456 = 56088  (ok=True)
+1234 * 5678 = 7006652  (ok=True)
+0000 * 0000 = 0  (ok=True)
+1111 * 0001 = 1111  (ok=True)
+1234567890123456 * 9876543210123456 = 1219326311263526... (ok=True)
+\end{verbatim}
+
+\section{Performance Analysis}
+
+\subsection{Benchmark Data}
+The algorithm was benchmarked against inputs of size $n=4$ to $n=2048$. The table below summarizes the execution time in seconds.
+
+\begin{center}
+\begin{tabular}{|c|c|c|} 
+ \hline
+ $n$ & Simple (s) & Karatsuba (s) \\ 
+ \hline
+4 & 0.000006 & 0.000019 \\ 
+ 8 & 0.000022 & 0.000030 \\
+ 16 & 0.000081 & 0.000101 \\
+ 32 & 0.000307 & 0.000335 \\
+ 64 & 0.001252 & 0.000939 \\
+ 128 & 0.004738 & 0.002732 \\
+ 256 & 0.019185 & 0.008245 \\
+ 512 & 0.077341 & 0.024642 \\
+ 1024 & 0.499853 & 0.073690 \\
+ 2048 & 1.433454 & 0.225801 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Visual Comparison}
+The graph below visualizes the performance crossover. Note the use of a log-log scale.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{benchmark_plot.png}
+    \caption{Comparison of execution time between Simple Recursive Multiplication and Karatsuba Multiplication.}
+    \label{fig:benchmark}
+\end{figure}
+
+\subsection{Discussion of Results}
+The benchmarking results clearly demonstrate the theoretical difference in time complexity between the Simple Recursive Multiplication ($O(n^2)$) and the Karatsuba algorithm ($O(n^{\log_2 3} \approx n^{1.58})$).
+
+For small input sizes ($n < 64$), the Simple Recursive method was marginally faster. This is expected due to the overhead associated with the Karatsuba implementation, which involves additional string conversions, padding, and arithmetic operations before the recursive calls can be made. However, a crossover point was observed around $n=64$. Beyond this point, Karatsuba became significantly more efficient.
+
+The difference in scaling became dramatic at larger input sizes. At $n=1024$, the Simple method took approximately 0.50 seconds, while Karatsuba took only 0.07 seconds. At $n=2048$, the gap widened further, with the Simple method taking 1.43 seconds compared to Karatsuba's 0.23 seconds. This aligns with the theoretical prediction that Karatsuba's performance degrades much more slowly than the quadratic degradation of the simple approach.
+
+\section{Implementation Details}
+A key implementation challenge involved handling strings of different lengths. The standard Karatsuba algorithm assumes inputs split evenly into $n/2$ parts. However, during recursion, the intermediate sums (e.g., $a+b$) can result in strings of different lengths due to carry-over digits (e.g., adding two 2-digit numbers can result in a 3-digit number).
+
+If these differing lengths are passed directly into the recursive function, the split point $m$ is calculated incorrectly for the shorter string, breaking the logic of the power-of-10 shifts. To solve this, I implemented a padding step before the third recursive call. The code calculates the maximum length of the two sums (`max\_len`) and uses Python's `zfill` method to pad the shorter string with leading zeros. This ensures that both inputs to the recursive call have the same length, preserving the symmetry required for the divide-and-conquer approach to function correctly.
+
+\pagebreak
+\section*{Appendix: Source Code}
+
+\begin{lstlisting}[language=Python, caption=Karatsuba Implementation]
+
+def k_multiply(x: str, y: str) -> str:
+    """
+    Karatsuba recursive multiplication for nonnegative integer strings.
+
+    Uses the optimized formula with only 3 recursive calls:
+    xy = ac*10^n + ((a+b)(c+d) - ac - bd)*10^(n/2) + bd
+
+    Includes padding logic using .zfill to handle cases where recursive
+    sums (a + b) and (c + d) result in strings of unequal length.
+    """
+    n = len(x)
+
+    if n == 1:
+        return str(int(x) * int(y))
+    
+    m = n // 2 
+    
+    a = x[:m]
+    b = x[m:]
+    c = y[:m]
+    d = y[m:]
+   
+    half_len = len(b)
+
+    a_plus_b = str(int(a) + int(b))
+    c_plus_d = str(int(c) + int(d))
+   
+    max_len = max(len(a_plus_b), len(c_plus_d))
+
+    a_plus_b = a_plus_b.zfill(max_len)
+    c_plus_d = c_plus_d.zfill(max_len)
+
+    a_c = k_multiply(a, c)
+    b_d = k_multiply(b, d)
+    
+    a_b_times_c_d = k_multiply(a_plus_b, c_plus_d)
+    
+    term1 = a_c + ("0" * (2 * half_len))
+    term2 = str(int(a_b_times_c_d) - int(a_c) - int(b_d)) + ("0" * half_len)
+
+    return str(int(term1) + int(term2) + int(b_d))
+\end{lstlisting}
+
+\end{document}

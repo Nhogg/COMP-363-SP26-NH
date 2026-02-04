@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9cc684-2756-483f-88ba-e83c12b662d0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/week01/assignment.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/week01/assignment.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,10 +79,24 @@
       <workItem from="1768959930875" duration="2245000" />
       <workItem from="1769029678354" duration="634000" />
       <workItem from="1769135083533" duration="2937000" />
+      <workItem from="1769738363792" duration="72000" />
+      <workItem from="1769756030612" duration="2877000" />
+      <workItem from="1769799221252" duration="1209000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
