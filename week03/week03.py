@@ -13,7 +13,7 @@ def reachability(s: int, G: list[list[int]]) -> list:
         list: A list of integers representing the indices of all reachable
               vertices.
 
-    """"
+   """ 
     reachable_vertices = set()
     visit_next = [s]
 
@@ -28,6 +28,33 @@ def reachability(s: int, G: list[list[int]]) -> list:
 
     return list(reachable_vertices)
 
+def count_components(G: list[list[int]]) -> int:
+    """
+    Counts the connected components in adjacency matrix G using reachability
+
+    Args:
+      G (list[list[int]]): An adjacency matrix representing the graph,
+                             where G[u][v] == 1 indicates an edge exists
+                             from u to v.
+    
+    Returns:
+        int: an integer representing the number of components found
+             in the graph.
+    """
+    total_vertices = len(G)
+    global_visited = set()
+    count = 0
+
+    for vertex in range(total_vertices):
+        if vertex not in global_visited:
+            count += 1
+
+            component = reachability(vertex, G)
+
+            global_visited.update(component)
+
+    return count
+
 
 def main():
     graph = [
@@ -40,8 +67,13 @@ def main():
     [ 0, 1, 0, 1, 0, 0, 0, 0],  # vertex 5
     [ 1, 0, 0, 0, 0, 0, 0, 0],  # vertex 6
     [ 0, 0, 0, 0, 0, 0, 0, 0]   # vertex 7
-]
+    ]
 
+    print("reachability from vertex 3:")
     print(reachability(3, graph))
 
-main()
+    print("\nTotal connected components:")
+    print(count_components(graph))
+
+if __name__ == "__main__":
+    main()
