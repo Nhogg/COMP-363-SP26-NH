@@ -1,0 +1,218 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{22 January, 2026}
+\newcommand{\hmwkClass}{COMP 363 - Algorithms}
+\newcommand{\hmwkClassTime}{}
+\newcommand{\hmwkClassInstructor}{Leo Irakliotis}
+\newcommand{\hmwkAuthorName}{\textbf{Nathan Hogg}}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+\begin{homeworkProblem}
+  \subsection*{Background}
+  The goal of this assignment is to prove the time complexity of the mergesort algorithm.
+  We are given the base complexity formula as:
+  \begin{align*}
+      T(n) = 2T(n / 2) + f(n)
+  \end{align*}
+In this case, $T(n)$ is the time it takes to mergesort an array of size $n$, and $f(n)$ is the time it takes to
+assemble two partial solutions of size $n / 2$ to a sorted array with $n$ elements. Generally, $f(n) \approx n$.
+
+For an array with $n = 8$, we can write:
+\begin{align*}
+T(8) = 2T(4) + f(8)
+\end{align*}
+Then, $T(4) = 2T(2)+f(4)$; and $T(2) = 2T(1) + f(2)$; and finally $T(1) = f(1)$. Using the last finding,
+we can solve backwards:
+\begin{align*}
+  T(2) &= 2T(1) + f(2) \\
+       &= 2f(1) + f(2) \\[1em]
+  T(4) &= 2T(2) + f(4) \\
+       &= 2(2f(1) + f(2)) + f(4) \\
+       &= 4f(1) + 2f(2) + f(4) \\[1em]
+  T(8) &= 2T(4) + f(8) \\
+       &= 2(4f(1) + 2f(2) + f(4)) + f(8) \\
+       &= 8f(1) + 4f(2) + 2f(4) + f(8)
+\end{align*}
+Given that $f(n) \equiv n$, the last equation can be rewritten as:
+\begin{align*}
+T(8) \equiv 8 \times 1 + 4 \times 2 + 2 \times 4 + 8 \\
+= 32 = 8 \times 3 \\
+= 8(1 + \log_{2}8)
+\end{align*}
+
+We have shown that, for mergesort, $T(n) \equiv n\log_{2}n$ (or, $\mathcal{O} (n\log_{2}n)$),
+
+\subsection*{Proof}
+We begin by expanding the recurrence relation:
+\begin{align*}
+    T(n) &= 2T\!\left(\frac{n}{2}\right) + f(n) \\[6pt]
+         &= 2\left[ 2T\!\left(\frac{n}{4}\right) + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[6pt]
+         &= 2\left[ 2\left[ 2T\!\left(\frac{n}{8}\right) + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n) \\[6pt]
+         &= 2\left[ 2\left[ 2\left[ 2T\!\left(\frac{n}{16}\right) + f\!\left(\frac{n}{8}\right) \right] + f\!\left(\frac{n}{4}\right) \right] + f\!\left(\frac{n}{2}\right) \right] + f(n)
+\intertext{By distributing the outer coefficients into the brackets, we see a pattern emerge:}
+    T(n) &= 16T\!\left(\frac{n}{16}\right) + 8f\!\left(\frac{n}{8}\right) + 4f\!\left(\frac{n}{4}\right) + 2f\!\left(\frac{n}{2}\right) + f(n)
+\intertext{We observe that for each term, the coefficient matches the denominator inside the function. Since the cost function for Mergesort is $f(n) = n$, we can substitute this into each term of the sum (e.g., $8 \cdot f(n/8) = 8 \cdot (n/8) = n$):}
+    T(n) &= 16T\!\left(\frac{n}{16}\right) + n + n + n + n \\[6pt]
+         &= 16T\!\left(\frac{n}{16}\right) + 4n
+\intertext{We can see that for a recursion of depth $k$, the first term becomes $2^k T(n/2^k)$, and we add $n$ exactly $k$ times. This can be generalized to the following:}
+    T(n) &= 2^k T\!\left(\frac{n}{2^k}\right) + k \cdot n
+\intertext{The recursion stops when the array size becomes 1 (the base case). If we set the array size $\frac{n}{2^k} = 1$, it implies that $2^k = n$. Solving for $k$:}
+    \frac{n}{2^k} &= 1 \implies 2^k = n \implies k = \log_2(n)
+\intertext{Finally, we substitute $k = \log_2(n)$ and $2^k = n$ back into the general formula derived above:}
+    T(n) &= n \cdot T(1) + n \log_2(n)
+\end{align*}
+
+\subsection*{Conclusion}
+We have successfully derived the expression for the recurrence relation. The final formula is:
+\begin{align*}
+  T(n)=n \times T(1) + n \log_{2}(n)
+\end{align*}
+If we assume that the base case, $T(1)$, takes a constant amount of time, denoted as $c$, then the equation becomes:
+\begin{align*}
+  T(n) = c \times n + n \log_{2}(n)
+\end{align*}
+As $n$ approaches infinity, the term $n\log_{2}(n)$ grows much faster than the linear term $c \times n$. Therefore, the linear term becomes negligible, and we conclude that the time complexity of Mergesort is:
+\begin{align*}
+  T(n) \in \mathcal{O}(n \log n)
+\end{align*}
+
+
+\end{homeworkProblem}
+
+\pagebreak
+
+
+\end{document}

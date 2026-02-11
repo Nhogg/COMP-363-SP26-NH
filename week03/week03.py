@@ -28,6 +28,7 @@ def reachability(s: int, G: list[list[int]]) -> list:
 
     return list(reachable_vertices)
 
+
 def count_components(G: list[list[int]]) -> int:
     """
     Counts the connected components in adjacency matrix G using reachability
@@ -36,7 +37,6 @@ def count_components(G: list[list[int]]) -> int:
       G (list[list[int]]): An adjacency matrix representing the graph,
                              where G[u][v] == 1 indicates an edge exists
                              from u to v.
-    
     Returns:
         int: an integer representing the number of components found
              in the graph.
@@ -76,4 +76,5 @@ def main():
     print(count_components(graph))
 
 if __name__ == "__main__":
+    Args:
     main()
