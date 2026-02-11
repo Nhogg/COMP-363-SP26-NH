@@ -76,5 +76,4 @@ def main():
     print(count_components(graph))
 
 if __name__ == "__main__":
-    Args:
     main()
