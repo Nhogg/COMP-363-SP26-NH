@@ -81,7 +81,7 @@ def report_sssp(p: list[int], d: list[int], graph: list[list[int]]) -> None:
     for target in range(n):
         # Handle unreachable vertices first
         if d[target] == float('inf'):
-            print(f"Vertex {target}: Unreacahble")
+            print(f"Vertex {target}: Unreachable")
             continue
 
         # Reconstruct path by backtracking
