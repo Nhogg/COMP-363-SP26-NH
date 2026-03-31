@@ -1,8 +1,9 @@
-# Computational Complexity: A 2-Hour Introduction
+# Computational Complexity: Brief Introduction
 
 ## Lecture Overview
 
-**Audience:** Graduate students from diverse backgrounds (CS, physics, law, bioinformatics, IT)  
+This is a collation of my past notes from a CS-only version of COMP 460. I have processed them with Claude to adopt them for a wider audience of graduate students from diverse backgrounds (CS, physics, law, bioinformatics, IT)  
+
 **Prerequisite assumed:** Freshman-level algebra, informal notion of "algorithm"  
 **Duration:** ~120 minutes (with a 10-minute break)  
 **Goal:** Build intuition for *why* some problems are fundamentally harder than others, culminating in the Cook–Levin theorem, Karp reductions, and 3-SAT.
