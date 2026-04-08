@@ -1,0 +1,40 @@
+
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{parskip}
+
+\title{Homework Reflections: Ungrading Exercise}
+\author{Nathan Hogg \\ COMP 363: Algorithms}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Homework 1 Reflection}
+
+When proving the time complexity of Mergesort, I used the substitution method to unroll the recurrence relation. I correctly observed the pattern that, at each level of recursion, the total work sums to $n$ (e.g., $8 \cdot f(n/8) = n$), which led me to the derivation of the general term $k \cdot n$.
+
+When comparing my work to the solution, I see that my approach relied heavily on intuition and pattern matching. The solution uses formal summation notation ($\sum_{i=0}^{k-1}$) to describe the accumulated non-recursive costs. This is a major structural difference. Although my method worked for mergesort because the terms canceled out cleanly to $n$, the approach given in the solution is much more robust. Using sigma notation allows us to handle complex cases where $f(n)$ might not simplify so easily (e.g., $f(n)=n^2$).
+
+In doing this assignment, I learned that formalizing the series of costs is just as important as identifying the depth of the recursion when creating a rigorous proof. In future recurrence problems, I will aim to model the expansion as a summation series instead of listing terms, as this reduces the risk of induction errors.
+
+\section*{Homework 2 Reflection}
+
+For the Karatsuba algorithm, I implemented a ``just-in-time'' padding strategy, where I only added zeros right before the calculation. I correctly used the three-multiplication formula, but my code had to handle length mismatches deep inside the recursive calls using conditional logic.
+
+When comparing my work to the solution, I realize my approach relied on fixing problems as they appeared. The solution normalizes the inputs upfront by padding them to the same length before doing anything else. This is a major structural difference. Although my method worked and produced the correct result, the solution's approach is much cleaner and less prone to indexing errors.
+
+In doing this assignment, I learned that preparing your data at the start is often better than writing complex logic to handle edge cases later on. In future divide-and-conquer problems, I will aim to normalize inputs early to simplify the recursive steps.
+
+\section*{Homework 3 Reflection}
+
+When writing the reachability function, I used a Set to track visited nodes and checked for duplicates \textit{before} adding them to the stack. I correctly identified that we needed to traverse the whole component, but I optimized the data structure choice for performance.
+
+When comparing my work to the solution, I see that my approach relied on my knowledge of Python's specific performance characteristics. The solution uses a simple List to track visited nodes. This is a major structural difference. Although the solution's method is correct, my approach is much more efficient because Set lookups are $O(1)$ while List lookups are $O(n)$. I also pruned the stack earlier than the solution did.
+
+In doing this assignment, I learned that choosing the right data structure is just as important as the algorithm itself. 
+
+\end{document}

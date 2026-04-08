@@ -1,0 +1,39 @@
+For each of the three homework assignments, do the following:
+
+* Compare your solution to the posted solution
+* Focus on approach, structure, and reasoning, not just the final answer.
+* If your solution differs but is still correct, say so and explain why.
+* Identify mistakes or weaknesses; these may include:
+  * Logical errors
+  * Incorrect assumptions
+  * Gaps in justification
+  * Inefficient or unclear reasoning
+  * A correct idea that was poorly communicated
+  * If you made no mistakes, explain what made your solution solid.
+
+* Explain what you learned
+  * What concept became clearer?
+  * Algorithm design technique?
+  * What would you do differently if you saw a similar problem again?
+
+* What not to do
+  * Do not simply list differences. 
+  * Do not write “I understand it now” without explaining what changed.
+  * Do not write what you think I want to hear.
+  * This is not about apologizing, defending yourself, or re-solving the problem.
+  * Honest analysis is more valuable than perfection
+
+Assignment 1:
+To prove the time complexity of mergesort, I used the substitution method to unroll the recurrence relation.
+I correctly observed the pattern that, at each level of recursion, the total work sums to n, (e.g. 8 * f(n/8)=n), leading me to the general term k * n.
+When comparing ym work to the solution, I realized that my approach relied heavily on intuition and pattern matching. The official solution utilized a formal summation notation to describe the accumulated non-recursive costs. This is a significant structural difference. While my method worked for mergesort because the terms calceneld out celanly to n, the solution's approach is far more robust. Using sigma notation allows for easier handling of complex cases where f(n) may not simplify as nicely.
+I learned that while identifying the depth of recursion is critical, mathematically formalizing the series of costs is essential for a rigorous proof. In the future, I will aim to model the expansion as a suimmation series rather than just listing the terms. This will reduce the risk of induction errors.
+
+Assignment 2:
+My implentation of the Karatsuba algorithm correctly utilized the three-multipilication formula to achieve the target efficciency. Structurally, both my solution and the official one rely on Python's int() and str() casting for the intermediate addition  / subtraction steps, which we both noted intriduces overhead for smaller inputs.
+
+A key difference lies in how we handled string lenghts. The provided 
+
+
+Assignment 3:
+
